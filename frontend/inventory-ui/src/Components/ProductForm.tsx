@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { API_URL } from '../api'
 import type { Product } from '../types/Product'
 
 type Props = {
@@ -25,7 +26,7 @@ const ProductForm = ({ onAdd }: Props) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:5204/api/products', form)
+      await axios.post(`${API_URL}/products`, form)
       alert('✅ Product added!')
       setForm({ name: '', sku: '', stock: 0, reorderLevel: 0 })
       onAdd() // 🔁 trigger parent to refetch product list

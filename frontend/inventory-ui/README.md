@@ -48,7 +48,12 @@ export default tseslint.config({
     // other rules...
     // Enable its recommended typescript rules
     ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
+  ...reactDom.configs.recommended.rules,
   },
 })
 ```
+
+## Configuration
+
+Copy `.env.example` to `.env` and set `VITE_API_URL` to the base address of
+your backend API. The React app will use this value when making requests.

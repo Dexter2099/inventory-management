@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { API_URL } from '../api'
 import type { Product } from '../types/Product'
 
 type Props = {
@@ -12,7 +13,7 @@ const OrderForm = ({ products, onAdd }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    await axios.post('http://localhost:5204/api/orders', form)
+    await axios.post(`${API_URL}/orders`, form)
     alert('✅ Order placed!')
     setForm({ productId: products[0]?.productId ?? 0, quantity: 1 })
     onAdd()

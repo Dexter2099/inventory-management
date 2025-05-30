@@ -27,5 +27,9 @@ dotnet run
 
 cd frontend/inventory-ui
 npm install
+# copy .env.example to .env and update the value if your backend runs elsewhere
 npm run dev
 ```
+
+The `.env` file in `frontend/inventory-ui` defines `VITE_API_URL`.
+Edit this value to point the React app at a different backend server.
