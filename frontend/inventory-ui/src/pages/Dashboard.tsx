@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { API_URL } from '../api'
 import type { Product } from '../types/Product'
 import type { Order } from '../types/Order'
 import ProductForm from '../Components/ProductForm'
@@ -16,7 +17,7 @@ const Dashboard = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true)
-      const res = await axios.get<Product[]>('http://localhost:5204/api/products')
+      const res = await axios.get<Product[]>(`${API_URL}/products`)
       setProducts(res.data)
     } catch (err) {
       console.error('❌ Failed to fetch products', err)
@@ -26,7 +27,7 @@ const Dashboard = () => {
   }
 
   const fetchOrders = async () => {
-    const res = await axios.get<Order[]>('http://localhost:5204/api/orders')
+    const res = await axios.get<Order[]>(`${API_URL}/orders`)
     setOrders(res.data)
   }
 
@@ -46,7 +47,7 @@ const Dashboard = () => {
 
   const handleDelete = async (id: number) => {
     if (!confirm('Delete this product?')) return
-    await axios.delete(`http://localhost:5204/api/products/${id}`)
+    await axios.delete(`${API_URL}/products/${id}`)
     fetchProducts()
   }
 
@@ -60,7 +61,7 @@ const Dashboard = () => {
     const reorderLevel = prompt('Reorder Level', String(p.reorderLevel))
     if (reorderLevel === null) return
 
-    await axios.put(`http://localhost:5204/api/products/${p.productId}`, {
+    await axios.put(`${API_URL}/products/${p.productId}`, {
       productId: p.productId,
       name,
       sku,
