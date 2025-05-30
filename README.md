@@ -2,9 +2,9 @@
 
 A full-stack web app using:
 
-- ⚛️ React + TypeScript (frontend)
-- 🐍 .NET 8 Web API + Entity Framework (backend)
-- 🗃️ SQL Server
+- React + TypeScript (frontend)
+- .NET 8 Web API + Entity Framework (backend)
+- SQL Server
 
 ## Features
 - Add products
