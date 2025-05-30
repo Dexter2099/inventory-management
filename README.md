@@ -57,3 +57,13 @@ python reports/generate_report.py
 
 Set `API_BASE_URL` if your backend runs on a different URL (defaults to
 `http://localhost:5204`).
+
+## What I learnt
+
+Building this app is a solid exercise for a new programmer. Through setting up
+the backend and frontend, you can learn how a React UI communicates with a
+.NET API using REST calls. The project demonstrates how environment variables
+configure connections to external services like SQL Server, and how scripts are
+used to manage dependencies. You'll also get practice working with basic CRUD
+data in a relational database and running the app locally through the provided
+setup instructions.
