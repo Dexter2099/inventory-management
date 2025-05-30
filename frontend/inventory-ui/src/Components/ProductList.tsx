@@ -2,9 +2,11 @@ import type { Product } from '../types/Product'
 
 type Props = {
   products?: Product[]  // 👈 optional
+  onEdit?: (product: Product) => void
+  onDelete?: (id: number) => void
 }
 
-const ProductList = ({ products = [] }: Props) => {  // 👈 default value
+const ProductList = ({ products = [], onEdit, onDelete }: Props) => {
 
   return (
     <div>
@@ -20,6 +22,9 @@ const ProductList = ({ products = [] }: Props) => {  // 👈 default value
               <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>SKU</th>
               <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Stock</th>
               <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Reorder Level</th>
+              {(onEdit || onDelete) && (
+                <th style={{ border: '1px solid #ccc', padding: '0.5rem' }}>Actions</th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -29,6 +34,16 @@ const ProductList = ({ products = [] }: Props) => {  // 👈 default value
                 <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>{p.sku}</td>
                 <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>{p.stock}</td>
                 <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>{p.reorderLevel}</td>
+                {(onEdit || onDelete) && (
+                  <td style={{ border: '1px solid #ccc', padding: '0.5rem' }}>
+                    {onEdit && (
+                      <button onClick={() => onEdit(p)} style={{ marginRight: '0.5rem' }}>Edit</button>
+                    )}
+                    {onDelete && (
+                      <button onClick={() => onDelete(p.productId)}>Delete</button>
+                    )}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
