@@ -38,3 +38,17 @@ Edit this value to point the React app at a different backend server.
 The backend can read its SQL Server connection from the `DB_CONNECTION_STRING`
 environment variable. If not set, it falls back to the connection string in
 `appsettings.json`.
+
+## Reports
+
+The backend exposes `GET /api/reports/inventory` which returns the current
+inventory as a CSV file. A small helper script is provided to fetch this data
+and save it locally.
+
+```bash
+pip install -r reports/requirements.txt
+python reports/generate_report.py
+```
+
+Set `API_BASE_URL` if your backend runs on a different URL (defaults to
+`http://localhost:5204`).

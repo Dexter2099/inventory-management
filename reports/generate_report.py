@@ -1,15 +1,15 @@
 import os
-import pyodbc
 import pandas as pd
+import requests
 
-conn_str = os.getenv(
-    "DB_CONNECTION_STRING",
-    'DRIVER={SQL Server};SERVER=localhost;DATABASE=InventoryDb;Trusted_Connection=yes;'
-)
-conn = pyodbc.connect(conn_str)
+api_base = os.getenv("API_BASE_URL", "http://localhost:5204")
+url = f"{api_base.rstrip('/')}/api/products"
 
-query = "SELECT Name, SKU, Stock FROM Products"
-df = pd.read_sql(query, conn)
+response = requests.get(url, timeout=10)
+response.raise_for_status()
+
+products = response.json()
+df = pd.DataFrame(products)[["name", "sku", "stock"]]
 df.to_csv("inventory_report.csv", index=False)
 
 print("Report generated: inventory_report.csv")
