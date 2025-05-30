@@ -12,6 +12,13 @@ A full-stack web app using:
 - Real-time sync
 - CORS enabled
 
+## Setup
+Run the helper script to install .NET, Node.js and Vite:
+
+```bash
+./scripts/setup.sh
+```
+
 ## Getting Started
 
 ```bash
@@ -21,3 +28,4 @@ dotnet run
 cd frontend/inventory-ui
 npm install
 npm run dev
+```
