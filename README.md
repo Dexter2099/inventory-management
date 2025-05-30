@@ -67,3 +67,5 @@ configure connections to external services like SQL Server, and how scripts are
 used to manage dependencies. You'll also get practice working with basic CRUD
 data in a relational database and running the app locally through the provided
 setup instructions.
+
+This architecture also introduces beginners to principles of scalable data handling. Separating the React front end from the .NET API shows how large datasets can be managed efficiently while keeping the UI responsive. The layered setup teaches you how to build apps that remain performant as data and traffic grow.
