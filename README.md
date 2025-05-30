@@ -39,6 +39,11 @@ The backend can read its SQL Server connection from the `DB_CONNECTION_STRING`
 environment variable. If not set, it falls back to the connection string in
 `appsettings.json`.
 
+## Database Setup
+1. Ensure a running SQL Server instance.
+2. Execute `database/schema.sql` to create the tables.
+3. Set `DB_CONNECTION_STRING` to override the default connection string.
+
 ## Reports
 
 The backend exposes `GET /api/reports/inventory` which returns the current
