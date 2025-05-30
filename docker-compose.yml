@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Your_password123
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+  backend:
+    build: ./backend/InventoryApi
+    environment:
+      - DB_CONNECTION_STRING=Server=sqlserver;Database=InventoryDb;User=sa;Password=Your_password123;TrustServerCertificate=True;
+      - ASPNETCORE_URLS=http://0.0.0.0:5204
+    ports:
+      - "5204:5204"
+    depends_on:
+      - sqlserver
+  frontend:
+    build: ./frontend/inventory-ui
+    environment:
+      - VITE_API_URL=http://backend:5204/api
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+volumes:
+  sqlserver-data:

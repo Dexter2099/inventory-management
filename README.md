@@ -38,6 +38,13 @@ Edit this value to point the React app at a different backend server.
 The backend can read its SQL Server connection from the `DB_CONNECTION_STRING`
 environment variable. If not set, it falls back to the connection string in
 `appsettings.json`.
+## Docker Compose
+Run the entire stack with Docker Compose:
+```bash
+docker-compose up --build
+```
+This will start SQL Server, the backend, and the frontend on http://localhost:5173.
+
 
 ## Database Setup
 1. Ensure a running SQL Server instance.
