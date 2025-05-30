@@ -3,9 +3,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔌 Connect to SQL Server
+// 🔌 Connect to SQL Server (read from config or DB_CONNECTION_STRING env var)
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var envConnection = builder.Configuration["DB_CONNECTION_STRING"];
+if (!string.IsNullOrEmpty(envConnection))
+{
+    connectionString = envConnection;
+}
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(connectionString));
 
 // 🔐 CORS config (allow all for dev)
 builder.Services.AddCors(options =>

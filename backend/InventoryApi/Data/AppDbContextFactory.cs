@@ -11,11 +11,17 @@ namespace InventoryApi.Data
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
+                .AddJsonFile("appsettings.json", optional: true)
+                .AddEnvironmentVariables()
                 .Build();
 
             var builder = new DbContextOptionsBuilder<AppDbContext>();
             var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var envConnection = configuration["DB_CONNECTION_STRING"];
+            if (!string.IsNullOrEmpty(envConnection))
+            {
+                connectionString = envConnection;
+            }
 
             builder.UseSqlServer(connectionString);
 
